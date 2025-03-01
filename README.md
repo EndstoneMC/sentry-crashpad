@@ -1,2 +1,3 @@
-# sentry-crashpad-handler-wheel
-crashpad_handler python wheels
+# sentry-crashpad Python Distribution
+
+Crashpad is a crash-reporting system.
