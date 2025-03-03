@@ -24,7 +24,7 @@ ExternalProject_add(build-crashpad-handler
         USES_TERMINAL_DOWNLOAD 1
         USES_TERMINAL_CONFIGURE 1
         USES_TERMINAL_BUILD 1
-        CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DSENTRY_BACKEND=crashpad
+        CMAKE_ARGS -DCMAKE_BUILD_TYPE=Release -DSENTRY_BACKEND=crashpad -DCRASHPAD_ZLIB_SYSTEM=OFF
         BUILD_COMMAND ${CRASHPAD_HANDLER_BUILD_COMMAND}
 )
 set(config-subfolder "")

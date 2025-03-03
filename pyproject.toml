@@ -48,6 +48,9 @@ environment = "CMAKE_GENERATOR=Ninja"
 manylinux-x86_64-image = "manylinux_2_28"
 manylinux-aarch64-image = "manylinux_2_28"
 
+[tool.cibuildwheel.linux]
+repair-wheel-command = "auditwheel repair --exclude 'libcurl*' -w {dest_dir} {wheel}"
+
 [[tool.cibuildwheel.overrides]]
 select = "*-manylinux*"
 before-all = "yum install -y libcurl-devel zlib-devel"
