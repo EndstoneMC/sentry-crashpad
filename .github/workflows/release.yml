@@ -14,10 +14,6 @@ on:
         description: "Version of the wheel packaging (appended to Sentry version)"
         required: false
         default: "0"
-      skip_emulation:
-        description: "Emulation builds to skip (e.g. qemu)"
-        required: false
-        default: ""
       deploy_to_testpypi:
         description: "Whether the build should be deployed to test.pypi.org instead regular PyPI"
         required: true
@@ -31,26 +27,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # emulated linux: generate 6 matrix combinations with qemu on ubuntu:
-        arch: [ "aarch64" ]
-        platform: [ "manylinux", "musllinux" ]
-        os: [ ubuntu-latest ]
-        emulation: [ "qemu" ]
-        exclude:
-          # conditionally skip jobs requiring emulation:
-          - os: ubuntu-latest
-            emulation: ${{ github.event.inputs.skip_emulation }}
         include:
           # linux
           - os: ubuntu-latest
             platform: "manylinux"
             arch: "x86_64"
-          - os: ubuntu-latest
-            platform: "musllinux"
-            arch: "x86_64"
-          - os: ubuntu-latest
-            platform: "musllinux"
-            arch: "i686"
           # windows
           - os: windows-2019
             platform: "win"
@@ -58,13 +39,6 @@ jobs:
           - os: windows-2019
             platform: "win"
             arch: "x86"
-          # macos
-          - os: macos-13
-            platform: "macos"
-            arch: "x86_64"
-          - os: macos-latest
-            platform: "macos"
-            arch: "arm64"
 
     steps:
       - uses: actions/checkout@v6
@@ -84,10 +58,6 @@ jobs:
         run: |
           echo "${{ github.event.inputs.sentry_version }}.${{ github.event.inputs.wheel_version }}" > sentry_version.txt
           cat sentry_version.txt
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4.0.0
-        if: runner.os == 'Linux' && matrix.emulation == 'qemu'
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v3.4
