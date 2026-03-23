@@ -33,10 +33,10 @@ jobs:
             platform: "manylinux"
             arch: "x86_64"
           # windows
-          - os: windows-2019
+          - os: windows-2022
             platform: "win"
             arch: "AMD64"
-          - os: windows-2019
+          - os: windows-2022
             platform: "win"
             arch: "x86"
 
