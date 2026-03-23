@@ -67,7 +67,7 @@ jobs:
             arch: "arm64"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Support long paths on Windows
         if: runner.os == 'Windows'
@@ -106,7 +106,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Override Sentry version (${{ github.event.inputs.sentry_version }})
         if: github.event.inputs.sentry_version
