@@ -60,7 +60,7 @@ jobs:
           cat sentry_version.txt
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v3.4
+        uses: pypa/cibuildwheel@v4.0
         env:
           CIBW_ARCHS: "${{ matrix.arch }}"
           # restrict to a single Python version as wheel does not depend on Python:
